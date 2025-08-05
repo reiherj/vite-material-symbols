@@ -1,0 +1,214 @@
+{
+  "version": "6.0",
+  "nxVersion": "21.3.11",
+  "pathMappings": {
+    "react-icons": [
+      "packages/vite-material-symbols/src/index.ts"
+    ]
+  },
+  "nxJsonPlugins": [
+    {
+      "name": "@nx/react/router-plugin",
+      "options": {
+        "buildTargetName": "build",
+        "devTargetName": "dev",
+        "startTargetName": "start",
+        "watchDepsTargetName": "watch-deps",
+        "buildDepsTargetName": "build-deps",
+        "typecheckTargetName": "typecheck"
+      }
+    },
+    {
+      "name": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    {
+      "name": "@nx/vite/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "testTargetName": "test",
+        "serveTargetName": "serve",
+        "devTargetName": "dev",
+        "previewTargetName": "preview",
+        "serveStaticTargetName": "serve-static",
+        "typecheckTargetName": "typecheck",
+        "buildDepsTargetName": "build-deps",
+        "watchDepsTargetName": "watch-deps"
+      }
+    }
+  ],
+  "fileMap": {
+    "projectFileMap": {
+      "react-icons": [
+        {
+          "file": "packages/vite-material-symbols/.babelrc",
+          "hash": "2946678488919325452"
+        },
+        {
+          "file": "packages/vite-material-symbols/README.md",
+          "hash": "12897011733997874700"
+        },
+        {
+          "file": "packages/vite-material-symbols/eslint.config.mjs",
+          "hash": "8789163670399984295",
+          "deps": [
+            "npm:@nx/eslint-plugin"
+          ]
+        },
+        {
+          "file": "packages/vite-material-symbols/package.json",
+          "hash": "2458225157151101836"
+        },
+        {
+          "file": "packages/vite-material-symbols/project.json",
+          "hash": "7824370169445610365"
+        },
+        {
+          "file": "packages/vite-material-symbols/src/index.ts",
+          "hash": "6581276689615922487"
+        },
+        {
+          "file": "packages/vite-material-symbols/src/lib/react-icons.module.css",
+          "hash": "125145030238681982"
+        },
+        {
+          "file": "packages/vite-material-symbols/src/lib/react-icons.tsx",
+          "hash": "8774343694828627014"
+        },
+        {
+          "file": "packages/vite-material-symbols/tsconfig.json",
+          "hash": "16310129786591335633"
+        },
+        {
+          "file": "packages/vite-material-symbols/tsconfig.lib.json",
+          "hash": "11908890256657676622"
+        },
+        {
+          "file": "packages/vite-material-symbols/vite.config.ts",
+          "hash": "4803770606653906292",
+          "deps": [
+            "npm:vite",
+            "npm:@vitejs/plugin-react",
+            "npm:vite-plugin-dts",
+            "npm:@nx/vite"
+          ]
+        }
+      ],
+      "vite-material-symbols": [
+        {
+          "file": ".gitignore",
+          "hash": "16023894880854878455"
+        },
+        {
+          "file": ".idea/.gitignore",
+          "hash": "3753433530925754155"
+        },
+        {
+          "file": ".idea/inspectionProfiles/Project_Default.xml",
+          "hash": "11953732531441326447"
+        },
+        {
+          "file": ".idea/nx-angular-config.xml",
+          "hash": "11747644467998611843"
+        },
+        {
+          "file": ".idea/vcs.xml",
+          "hash": "14600148892634157659"
+        },
+        {
+          "file": ".nx/installation/package-lock.json",
+          "hash": "5206712740028685683"
+        },
+        {
+          "file": ".nx/installation/package.json",
+          "hash": "326942075377092595"
+        },
+        {
+          "file": ".nx/nxw.js",
+          "hash": "11301648124127104610"
+        },
+        {
+          "file": ".prettierignore",
+          "hash": "14688272390704683536"
+        },
+        {
+          "file": ".prettierrc",
+          "hash": "16267754514737964994"
+        },
+        {
+          "file": "LICENSE",
+          "hash": "1450573318779535633"
+        },
+        {
+          "file": "README.md",
+          "hash": "14598534661798072110"
+        },
+        {
+          "file": "eslint.config.mjs",
+          "hash": "8944620160701465",
+          "deps": [
+            "npm:@nx/eslint-plugin"
+          ]
+        },
+        {
+          "file": "nx.json",
+          "hash": "13881617708325744947"
+        },
+        {
+          "file": "package-lock.json",
+          "hash": "275159135280137867"
+        },
+        {
+          "file": "package.json",
+          "hash": "18050475221479236201",
+          "deps": [
+            "npm:@babel/core",
+            "npm:@babel/preset-react",
+            "npm:@eslint/js",
+            "npm:@nx/eslint",
+            "npm:@nx/eslint-plugin",
+            "npm:@nx/js",
+            "npm:@nx/node",
+            "npm:@nx/react",
+            "npm:@nx/vite",
+            "npm:@nx/web",
+            "npm:@swc-node/register",
+            "npm:@swc/core",
+            "npm:@swc/helpers",
+            "npm:@types/node",
+            "npm:@types/react",
+            "npm:@types/react-dom",
+            "npm:@vitejs/plugin-react",
+            "npm:@vitest/ui",
+            "npm:ajv",
+            "npm:eslint",
+            "npm:eslint-config-prettier",
+            "npm:eslint-plugin-import",
+            "npm:eslint-plugin-jsx-a11y",
+            "npm:eslint-plugin-react",
+            "npm:eslint-plugin-react-hooks",
+            "npm:jiti",
+            "npm:jsdom",
+            "npm:nx",
+            "npm:prettier",
+            "npm:tslib",
+            "npm:typescript",
+            "npm:typescript-eslint",
+            "npm:vite",
+            "npm:vite-plugin-dts",
+            "npm:vitest",
+            "npm:react",
+            "npm:react-dom"
+          ]
+        },
+        {
+          "file": "tsconfig.base.json",
+          "hash": "18160415516320322099"
+        }
+      ]
+    },
+    "nonProjectFiles": []
+  }
+}
