@@ -1,6 +1,8 @@
 vite.config.*.timestamp*
 vitest.config.*.timestamp*
 
+.nx/cache
+
 # Created by https://www.toptal.com/developers/gitignore/api/node,intellij+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,intellij+all
 
