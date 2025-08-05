@@ -41,61 +41,6 @@
   ],
   "fileMap": {
     "projectFileMap": {
-      "react-icons": [
-        {
-          "file": "packages/vite-material-symbols/.babelrc",
-          "hash": "2946678488919325452"
-        },
-        {
-          "file": "packages/vite-material-symbols/README.md",
-          "hash": "12897011733997874700"
-        },
-        {
-          "file": "packages/vite-material-symbols/eslint.config.mjs",
-          "hash": "8789163670399984295",
-          "deps": [
-            "npm:@nx/eslint-plugin"
-          ]
-        },
-        {
-          "file": "packages/vite-material-symbols/package.json",
-          "hash": "2458225157151101836"
-        },
-        {
-          "file": "packages/vite-material-symbols/project.json",
-          "hash": "7824370169445610365"
-        },
-        {
-          "file": "packages/vite-material-symbols/src/index.ts",
-          "hash": "6581276689615922487"
-        },
-        {
-          "file": "packages/vite-material-symbols/src/lib/react-icons.module.css",
-          "hash": "125145030238681982"
-        },
-        {
-          "file": "packages/vite-material-symbols/src/lib/react-icons.tsx",
-          "hash": "8774343694828627014"
-        },
-        {
-          "file": "packages/vite-material-symbols/tsconfig.json",
-          "hash": "16310129786591335633"
-        },
-        {
-          "file": "packages/vite-material-symbols/tsconfig.lib.json",
-          "hash": "11908890256657676622"
-        },
-        {
-          "file": "packages/vite-material-symbols/vite.config.ts",
-          "hash": "4803770606653906292",
-          "deps": [
-            "npm:vite",
-            "npm:@vitejs/plugin-react",
-            "npm:vite-plugin-dts",
-            "npm:@nx/vite"
-          ]
-        }
-      ],
       "vite-material-symbols": [
         {
           "file": ".gitignore",
@@ -206,6 +151,61 @@
         {
           "file": "tsconfig.base.json",
           "hash": "18160415516320322099"
+        }
+      ],
+      "react-icons": [
+        {
+          "file": "packages/vite-material-symbols/.babelrc",
+          "hash": "2946678488919325452"
+        },
+        {
+          "file": "packages/vite-material-symbols/README.md",
+          "hash": "12897011733997874700"
+        },
+        {
+          "file": "packages/vite-material-symbols/eslint.config.mjs",
+          "hash": "8789163670399984295",
+          "deps": [
+            "npm:@nx/eslint-plugin"
+          ]
+        },
+        {
+          "file": "packages/vite-material-symbols/package.json",
+          "hash": "2458225157151101836"
+        },
+        {
+          "file": "packages/vite-material-symbols/project.json",
+          "hash": "7824370169445610365"
+        },
+        {
+          "file": "packages/vite-material-symbols/src/index.ts",
+          "hash": "6581276689615922487"
+        },
+        {
+          "file": "packages/vite-material-symbols/src/lib/react-icons.module.css",
+          "hash": "125145030238681982"
+        },
+        {
+          "file": "packages/vite-material-symbols/src/lib/react-icons.tsx",
+          "hash": "8774343694828627014"
+        },
+        {
+          "file": "packages/vite-material-symbols/tsconfig.json",
+          "hash": "16310129786591335633"
+        },
+        {
+          "file": "packages/vite-material-symbols/tsconfig.lib.json",
+          "hash": "11908890256657676622"
+        },
+        {
+          "file": "packages/vite-material-symbols/vite.config.ts",
+          "hash": "4803770606653906292",
+          "deps": [
+            "npm:vite",
+            "npm:@vitejs/plugin-react",
+            "npm:vite-plugin-dts",
+            "npm:@nx/vite"
+          ]
         }
       ]
     },
