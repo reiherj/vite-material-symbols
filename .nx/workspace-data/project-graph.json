@@ -259,6 +259,94 @@
         "implicitDependencies": []
       }
     },
+    "splitter": {
+      "name": "splitter",
+      "type": "app",
+      "data": {
+        "root": "apps/splitter",
+        "name": "splitter",
+        "release": {
+          "version": {
+            "generator": "@monodon/rust:release-version"
+          }
+        },
+        "targets": {
+          "nx-release-publish": {
+            "dependsOn": [
+              "^nx-release-publish"
+            ],
+            "executor": "@monodon/rust:release-publish",
+            "options": {},
+            "configurations": {},
+            "parallelism": true
+          },
+          "build": {
+            "cache": true,
+            "executor": "@monodon/rust:build",
+            "outputs": [
+              "{options.target-dir}"
+            ],
+            "options": {
+              "target-dir": "dist/target/splitter"
+            },
+            "configurations": {
+              "production": {
+                "release": true
+              }
+            },
+            "parallelism": true
+          },
+          "test": {
+            "cache": true,
+            "executor": "@monodon/rust:test",
+            "outputs": [
+              "{options.target-dir}"
+            ],
+            "options": {
+              "target-dir": "dist/target/splitter"
+            },
+            "configurations": {
+              "production": {
+                "release": true
+              }
+            },
+            "parallelism": true
+          },
+          "lint": {
+            "cache": true,
+            "executor": "@monodon/rust:lint",
+            "outputs": [
+              "{options.target-dir}"
+            ],
+            "options": {
+              "target-dir": "dist/target/splitter"
+            },
+            "configurations": {},
+            "parallelism": true
+          },
+          "run": {
+            "executor": "@monodon/rust:run",
+            "outputs": [
+              "{options.target-dir}"
+            ],
+            "options": {
+              "target-dir": "dist/target/splitter"
+            },
+            "configurations": {
+              "production": {
+                "release": true
+              }
+            },
+            "parallelism": true
+          }
+        },
+        "$schema": "../../node_modules/nx/schemas/project-schema.json",
+        "projectType": "application",
+        "sourceRoot": "apps/splitter/src",
+        "tags": [],
+        "implicitDependencies": []
+      }
+    },
     "vite-material-symbols": {
       "name": "vite-material-symbols",
       "type": "lib",
@@ -293,6 +381,54 @@
     }
   },
   "externalNodes": {
+    "cargo:ttf-parser": {
+      "type": "cargo",
+      "name": "cargo:ttf-parser",
+      "data": {
+        "packageName": "ttf-parser",
+        "version": "0.25.1"
+      }
+    },
+    "cargo:core_maths": {
+      "type": "cargo",
+      "name": "cargo:core_maths",
+      "data": {
+        "packageName": "core_maths",
+        "version": "0.0.0"
+      }
+    },
+    "cargo:base64": {
+      "type": "cargo",
+      "name": "cargo:base64",
+      "data": {
+        "packageName": "base64",
+        "version": "0.0.0"
+      }
+    },
+    "cargo:pico-args": {
+      "type": "cargo",
+      "name": "cargo:pico-args",
+      "data": {
+        "packageName": "pico-args",
+        "version": "0.0.0"
+      }
+    },
+    "cargo:tiny-skia-path": {
+      "type": "cargo",
+      "name": "cargo:tiny-skia-path",
+      "data": {
+        "packageName": "tiny-skia-path",
+        "version": "0.0.0"
+      }
+    },
+    "cargo:xmlwriter": {
+      "type": "cargo",
+      "name": "cargo:xmlwriter",
+      "data": {
+        "packageName": "xmlwriter",
+        "version": "0.0.0"
+      }
+    },
     "npm:@ampproject/remapping": {
       "type": "npm",
       "name": "npm:@ampproject/remapping",
@@ -11851,6 +11987,13 @@
         "type": "static"
       }
     ],
+    "splitter": [
+      {
+        "source": "splitter",
+        "target": "cargo:ttf-parser",
+        "type": "static"
+      }
+    ],
     "vite-material-symbols": [
       {
         "source": "vite-material-symbols",
@@ -11870,6 +12013,11 @@
       {
         "source": "vite-material-symbols",
         "target": "npm:@eslint/js",
+        "type": "static"
+      },
+      {
+        "source": "vite-material-symbols",
+        "target": "npm:@monodon/rust",
         "type": "static"
       },
       {
@@ -27859,5 +28007,5 @@
   },
   "version": "6.0",
   "errors": [],
-  "computedAt": 1754387596118
+  "computedAt": 1754467838291
 }

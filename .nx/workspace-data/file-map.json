@@ -37,30 +37,38 @@
         "buildDepsTargetName": "build-deps",
         "watchDepsTargetName": "watch-deps"
       }
+    },
+    {
+      "name": "@monodon/rust",
+      "version": "^2.3.0"
+    },
+    {
+      "name": "@monodon/rust",
+      "version": "^2.3.0"
     }
   ],
   "fileMap": {
     "projectFileMap": {
       "vite-material-symbols": [
         {
+          "file": ".DS_Store",
+          "hash": "13920012772283234806"
+        },
+        {
+          "file": ".cargo/config.toml",
+          "hash": "16334474086392874934"
+        },
+        {
           "file": ".gitignore",
-          "hash": "16023894880854878455"
+          "hash": "3891304039808479445"
         },
         {
-          "file": ".idea/.gitignore",
-          "hash": "3753433530925754155"
+          "file": ".idea/codeStyles/Project.xml",
+          "hash": "16611529951762125426"
         },
         {
-          "file": ".idea/inspectionProfiles/Project_Default.xml",
-          "hash": "11953732531441326447"
-        },
-        {
-          "file": ".idea/nx-angular-config.xml",
-          "hash": "11747644467998611843"
-        },
-        {
-          "file": ".idea/vcs.xml",
-          "hash": "14600148892634157659"
+          "file": ".idea/codeStyles/codeStyleConfig.xml",
+          "hash": "4690022301721055948"
         },
         {
           "file": ".nx/installation/package-lock.json",
@@ -83,6 +91,14 @@
           "hash": "16267754514737964994"
         },
         {
+          "file": "Cargo.lock",
+          "hash": "6741991713171562354"
+        },
+        {
+          "file": "Cargo.toml",
+          "hash": "4539421514256736035"
+        },
+        {
           "file": "LICENSE",
           "hash": "1450573318779535633"
         },
@@ -98,20 +114,33 @@
           ]
         },
         {
+          "file": "font/DejaVuSans.ttf",
+          "hash": "11295397707731799431"
+        },
+        {
+          "file": "font/MaterialIcons-Regular.codepoints",
+          "hash": "15619479787163625562"
+        },
+        {
+          "file": "font/MaterialIcons-Regular.ttf",
+          "hash": "1845634491442634811"
+        },
+        {
           "file": "nx.json",
-          "hash": "13881617708325744947"
+          "hash": "11024401022943666661"
         },
         {
           "file": "package-lock.json",
-          "hash": "275159135280137867"
+          "hash": "7341372781944382881"
         },
         {
           "file": "package.json",
-          "hash": "18050475221479236201",
+          "hash": "13938744891353382663",
           "deps": [
             "npm:@babel/core",
             "npm:@babel/preset-react",
             "npm:@eslint/js",
+            "npm:@monodon/rust",
             "npm:@nx/eslint",
             "npm:@nx/eslint-plugin",
             "npm:@nx/js",
@@ -206,6 +235,23 @@
             "npm:vite-plugin-dts",
             "npm:@nx/vite"
           ]
+        }
+      ],
+      "splitter": [
+        {
+          "file": "apps/splitter/Cargo.toml",
+          "hash": "4398344528662369015",
+          "deps": [
+            "cargo:ttf-parser"
+          ]
+        },
+        {
+          "file": "apps/splitter/project.json",
+          "hash": "17055265025028356152"
+        },
+        {
+          "file": "apps/splitter/src/main.rs",
+          "hash": "14623292909666244675"
         }
       ]
     },

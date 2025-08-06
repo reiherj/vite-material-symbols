@@ -477,6 +477,184 @@
       "nx/core/project-json"
     ]
   },
+  "apps/splitter": {
+    "root": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "name": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "release": [
+      "apps/splitter/Cargo.toml",
+      "@monodon/rust"
+    ],
+    "targets": [
+      "apps/splitter/Cargo.toml",
+      "@monodon/rust"
+    ],
+    "targets.nx-release-publish": [
+      "apps/splitter/Cargo.toml",
+      "@monodon/rust"
+    ],
+    "targets.nx-release-publish.dependsOn": [
+      "apps/splitter/Cargo.toml",
+      "@monodon/rust"
+    ],
+    "targets.nx-release-publish.executor": [
+      "apps/splitter/Cargo.toml",
+      "@monodon/rust"
+    ],
+    "targets.nx-release-publish.options": [
+      "apps/splitter/Cargo.toml",
+      "@monodon/rust"
+    ],
+    "$schema": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.cache": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.target-dir": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.configurations.production.release": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.cache": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.target-dir": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations.production": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.configurations.production.release": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.cache": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.target-dir": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.run": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.run.executor": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.run.outputs": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.run.options": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.run.configurations": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.run.options.target-dir": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.run.configurations.production": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.run.configurations.production.release": [
+      "apps/splitter/project.json",
+      "nx/core/project-json"
+    ]
+  },
   ".": {
     "root": [
       "package.json",
