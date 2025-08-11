@@ -17,6 +17,11 @@
         }
       }
     },
+    "build-wasm": {
+      "cache": true,
+      "executor": "nx:run-commands",
+      "outputs": []
+    },
     "test": {
       "cache": true,
       "executor": "@monodon/rust:test",
