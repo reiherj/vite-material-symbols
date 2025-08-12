@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "react-icons": ["packages/vite-material-symbols/src/index.ts"]
+      "foo": ["packages/foo/src/index.ts"],
+      "vite-material-symbols": ["packages/vite-material-symbols/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

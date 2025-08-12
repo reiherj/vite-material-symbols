@@ -37,13 +37,37 @@
       }
     },
     "@monodon/rust",
-    "@monodon/rust"
+    "@monodon/rust",
+    {
+      "plugin": "@nx/playwright/plugin",
+      "options": {
+        "targetName": "e2e"
+      }
+    }
   ],
   "generators": {
     "@nx/react": {
       "library": {
+        "style": "css",
+        "linter": "eslint",
         "unitTestRunner": "none"
+      },
+      "application": {
+        "babel": true,
+        "style": "css",
+        "linter": "eslint",
+        "bundler": "vite"
+      },
+      "component": {
+        "style": "css"
       }
+    }
+  },
+  "targetDefaults": {
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["default", "^default"]
     }
   }
 }

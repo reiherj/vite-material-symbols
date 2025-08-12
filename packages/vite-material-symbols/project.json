@@ -1,9 +1,21 @@
 {
-  "name": "react-icons",
+  "name": "vite-material-symbols",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/vite-material-symbols/src",
   "projectType": "library",
   "tags": [],
   "// targets": "to see all targets run: nx show project react-icons --web",
-  "targets": {}
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/vite-material-symbols",
+        "tsConfig": "packages/vite-material-symbols/tsconfig.lib.json",
+        "packageJson": "packages/vite-material-symbols/package.json",
+        "main": "packages/vite-material-symbols/src/index.ts",
+        "assets": ["packages/vite-material-symbols/*.md"]
+      }
+    }
+  }
 }
