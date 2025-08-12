@@ -5,16 +5,30 @@ use crate::outline_builder::SvgPath;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub fn generate_paths_wasm(icon_name: &str) -> Result<String, JsValue> {
-    match generate_paths(icon_name) {
-        Ok(path) => Ok(path),
-        Err(e) => Err(JsValue::from_str(&e.to_string())),
+struct Symbols {
+    foo: String,
+    data: Vec<u8>
+}
+
+#[wasm_bindgen]
+impl Symbols {
+    #[wasm_bindgen(constructor)]
+    pub fn new() -> Symbols {
+        Symbols {
+            foo: String::from("bar"),
+            data: Vec::new()
+        }
+    }
+    
+    #[wasm_bindgen(getter)]
+    pub fn foo(&self) -> String {
+        self.foo.clone()
     }
 }
 
 pub fn generate_paths(icon_name: &str) -> Result<String, Box<dyn std::error::Error>> {
     let output_path = format!("./{icon_name}.svg");
-    
+
     let data = fs::read("./font/MaterialIcons-Regular.ttf")?;
     let face = Face::parse(&data, 0)?;
     let mut svg_path_builder = SvgPath::new();

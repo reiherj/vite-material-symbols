@@ -11,8 +11,9 @@ pub struct MaterialSymbols {
     data: Vec<u8>,
 }
 
-#[wasm_bindgen(constructor)]
+#[wasm_bindgen]
 impl MaterialSymbols {
+    #[wasm_bindgen(constructor)]
     pub fn new(bytes: &[u8]) -> Result<MaterialSymbols, JsValue> {
         Face::parse(bytes, 0).expect("Font should be parsed correctly.");
         Ok(MaterialSymbols {
