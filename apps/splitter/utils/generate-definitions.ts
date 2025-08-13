@@ -31,7 +31,7 @@ const mappings: Mapping[] = identifiers
 
     return { id, transformedId };
   })
-  .filter(({ transformedId }) => transformedId.length > 0);
+  .filter(({ transformedId, id }) => transformedId.length > 0 && id !== 'flourescent');
 
 /**
  * Create d.ts
