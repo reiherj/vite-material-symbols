@@ -12,6 +12,9 @@ export function App() {
       <li>
         <Person />
       </li>
+      <li>
+        <ZoomOut />
+      </li>
     </div>
   );
 }

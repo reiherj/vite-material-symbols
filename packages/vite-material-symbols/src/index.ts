@@ -1,13 +1,6 @@
 import type { Plugin } from 'vite';
 import { get_icon } from './font';
-
-const SUPPORTED_EXPORTS = ['Home', 'Menu', 'Person'] as const;
-
-const exportGlyphs: Record<(typeof SUPPORTED_EXPORTS)[number], string> = {
-  Home: 'home',
-  Menu: 'menu',
-  Person: 'person',
-};
+import { iconMapping, supportedExports } from './mappings';
 
 export const materialSymbolsPlugin = (): Plugin => {
   const VIRTUAL_ID = 'vite-mat-symbols';
@@ -32,8 +25,8 @@ export const materialSymbolsPlugin = (): Plugin => {
     async load(id) {
       // Split into multiple imports
       if (id === RESOLVED_ID) {
-        const lines = SUPPORTED_EXPORTS.map((exp) => {
-          const glyph = exportGlyphs[exp];
+        const lines = supportedExports.map((exp) => {
+          const glyph = iconMapping[exp];
 
           return `export { default as ${exp} } from '${ICON_PREFIX}${glyph}';`;
         });

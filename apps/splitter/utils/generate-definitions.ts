@@ -1,43 +1,50 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
+type Mapping = {
+  id: string;
+  transformedId: string;
+};
+
 const codepointsText = readFileSync(join('..', 'font', 'MaterialIcons-Regular.codepoints'), {
   encoding: 'utf-8',
 });
 
 const identifiers = codepointsText.split('\n').map((line) => line.split(' ')[0]);
 
-const transformedIds = identifiers
-  .map((id) =>
-    id
+const mappings: Mapping[] = identifiers
+  .map((id) => {
+    let transformedId = id
       .split('_')
       .map((part) => {
         if (part) {
           return part[0].toUpperCase() + part.slice(1);
         }
       })
-      .join('')
-  )
-  .map((line) => {
-    const firstCharCode = line.charCodeAt(0);
+      .join('');
+
+    const firstCharCode = transformedId.charCodeAt(0);
+
     if (firstCharCode >= 48 && firstCharCode <= 57) {
-      return 'Icon' + line;
+      transformedId = 'Icon' + transformedId;
     }
 
-    return line;
+    return { id, transformedId };
   })
-  .filter((line) => line.length > 0);
+  .filter(({ transformedId }) => transformedId.length > 0);
 
-const defLines = transformedIds.map((id, index) => {
+/**
+ * Create d.ts
+ */
+const defLines = mappings.map((mapping, index) => {
   if (index === 0) {
-    return `export const ${id}: string;`;
+    return `export const ${mapping.transformedId}: string;`;
   }
 
-  return `  export const ${id}: string;`;
+  return `  export const ${mapping.transformedId}: string;`;
 });
 
-const def = `
-// src/vite-mat-symbols.d.ts
+const def = `// src/vite-mat-symbols.d.ts
 declare module 'vite-mat-symbols' {
   ${defLines.join('\n')}
   const _default: string[];
@@ -45,6 +52,23 @@ declare module 'vite-mat-symbols' {
 }
 `;
 
-writeFileSync(join('..', '..', 'web-react-test-app', 'src', 'vit-mat-symbols.d.ts'), def, {
+// TODO: determine where to put this later on
+writeFileSync(join('..', '..', 'web-react-test-app', 'src', 'vite-mat-symbols.d.ts'), def, {
+  encoding: 'utf-8',
+});
+
+/**
+ * Create mapping from proper import name to icon id as defined by the codepoints file
+ */
+const mapStr = `export const iconMapping = {
+  ${mappings.map(({ transformedId, id }) => `${transformedId}: '${id}'`).join(',\n')}
+}
+
+export const supportedExports = [
+  ${mappings.map(({ transformedId }) => `'${transformedId}'`).join(',\n')}
+]
+`;
+
+writeFileSync(join('..', '..', '..', 'packages', 'vite-material-symbols', 'src', 'mappings.ts'), mapStr, {
   encoding: 'utf-8',
 });
