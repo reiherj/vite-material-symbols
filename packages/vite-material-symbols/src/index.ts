@@ -44,13 +44,6 @@ export const materialSymbolsPlugin = (): Plugin => {
       // Per-icon virtual module source
       if (id.startsWith(RESOLVED_ICON_PREFIX)) {
         const glyph = id.slice(RESOLVED_ICON_PREFIX.length);
-        // const svg = `
-        //   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        //     <title>${glyph}</title>
-        //     <rect width="24" height="24" fill="none"/>
-        //   </svg>
-        // `;
-
         const svg = get_icon(glyph);
 
         return `

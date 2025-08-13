@@ -1,4 +1,4 @@
-import { Menu, Home, Person } from 'vite-mat-symbols';
+import { Menu, Home, Person, ZoomOut } from 'vite-mat-symbols';
 
 export function App() {
   return (
