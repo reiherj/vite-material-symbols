@@ -1,8 +1,4 @@
-// Uncomment this line to use CSS modules
-// import styles from './app.module.css';
 import { Menu, Home, Person } from 'vite-mat-symbols';
-
-console.log(Menu, Home, Person);
 
 export function App() {
   return (

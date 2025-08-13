@@ -1,46 +1,27 @@
 use std::collections::HashMap;
-use std::fs;
 use ttf_parser::Face;
 use crate::outline_builder::SvgPath;
-use wasm_bindgen::prelude::*;
 
-#[wasm_bindgen]
-struct Symbols {
-    foo: String,
-    data: Vec<u8>
-}
+pub static MATERIAL_SYMBOLS_TTF: &[u8] = include_bytes!(
+    concat!(env!("CARGO_MANIFEST_DIR"), "/font/MaterialIcons-Regular.ttf")
+);
 
-#[wasm_bindgen]
-impl Symbols {
-    #[wasm_bindgen(constructor)]
-    pub fn new() -> Symbols {
-        Symbols {
-            foo: String::from("bar"),
-            data: Vec::new()
-        }
-    }
-    
-    #[wasm_bindgen(getter)]
-    pub fn foo(&self) -> String {
-        self.foo.clone()
-    }
-}
+pub static CODEPOINTS: &[u8] = include_bytes!(
+    concat!(env!("CARGO_MANIFEST_DIR"), "/font/MaterialIcons-Regular.codepoints")
+);
 
 pub fn generate_paths(icon_name: &str) -> Result<String, Box<dyn std::error::Error>> {
-    let output_path = format!("./{icon_name}.svg");
-
-    let data = fs::read("./font/MaterialIcons-Regular.ttf")?;
-    let face = Face::parse(&data, 0)?;
+    let face = Face::parse(MATERIAL_SYMBOLS_TTF, 0)?;
     let mut svg_path_builder = SvgPath::new();
 
     // Print some basic font info
     // print_basic_font_info(&face);
 
     // Parse codepoints
-    let codepoints = parse_codepoints("./font/MaterialIcons-Regular.codepoints")?;
+    let codepoints = parse_codepoints()?;
 
     // Get some glyph
-    let codepoint_value = u32::from_str_radix(codepoints["menu"].as_str(), 16)?;
+    let codepoint_value = u32::from_str_radix(codepoints[icon_name].as_str(), 16)?;
     let c = char::from_u32(codepoint_value).ok_or("Invalid codepoint")?;
     let glyph_id = face.glyph_index(c).ok_or("Glyph not found")?;
 
@@ -55,28 +36,27 @@ pub fn generate_paths(icon_name: &str) -> Result<String, Box<dyn std::error::Err
     // let view_box = format!("{} {} {} {}", bbox.x_min, -bbox.y_max, bbox.width(), bbox.height());
     let view_box = "0 -48 48 48";
     let svg = wrap_svg(svg_path_builder.path.as_str(), view_box);
-    fs::write(output_path.as_str(), svg.as_bytes()).expect("Could not create SVG.");
 
-    Ok(output_path)
+    Ok(svg)
 }
 
-fn print_basic_font_info(face: &Face) {
-    let is_reg = face.is_regular();
+// fn print_basic_font_info(face: &Face) {
+//     let is_reg = face.is_regular();
+//
+//     let names = face.names();
+//
+//    for name in names.into_iter() {
+//         if let Some(i) = name.to_string() {
+//             println!("{}", i);
+//         };
+//     }
+//
+//     println!("Font is regualar? {}", is_reg);
+//     println!("Number of glyphs: {}", face.number_of_glyphs());
+// }
 
-    let names = face.names();
-
-   for name in names.into_iter() {
-        if let Some(i) = name.to_string() {
-            println!("{}", i);
-        };
-    }
-
-    println!("Font is regualar? {}", is_reg);
-    println!("Number of glyphs: {}", face.number_of_glyphs());
-}
-
-fn parse_codepoints(path: &str) -> Result<HashMap<String, String>, Box<dyn std::error::Error>> {
-    let codepoints_text = fs::read_to_string(path)?
+fn parse_codepoints() -> Result<HashMap<String, String>, Box<dyn std::error::Error>> {
+    let codepoints_text = String::from_utf8_lossy(CODEPOINTS)
         .lines()
         .map(|line| {
             let parts: Vec<_> = line.split_whitespace().collect();
