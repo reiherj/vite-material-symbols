@@ -1,23 +1,20 @@
-import { Menu, Home, Person, ZoomOut, Abc } from 'vite-mat-symbols';
+import { Menu, Home, Person, ZoomOut, Abc, AccessAlarm } from 'vite-mat-symbols';
 
 export function App() {
   return (
     <div>
-      <li>
-        <Menu />
-      </li>
-      <li>
+      <div>
         <Home />
-      </li>
-      <li>
+      </div>
+      <div>
         <Person />
-      </li>
-      <li>
+      </div>
+      <div>
         <ZoomOut />
-      </li>
-      <li>
-        <Abc />
-      </li>
+      </div>
+      <div>
+        <AccessAlarm />
+      </div>
     </div>
   );
 }

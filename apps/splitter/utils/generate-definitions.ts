@@ -6,7 +6,7 @@ type Mapping = {
   transformedId: string;
 };
 
-const codepointsText = readFileSync(join('..', 'font', 'MaterialIcons-Regular.codepoints'), {
+const codepointsText = readFileSync(join('..', 'font', 'material-symbols-outlined.codepoints'), {
   encoding: 'utf-8',
 });
 
@@ -58,17 +58,49 @@ writeFileSync(join('..', '..', 'web-react-test-app', 'src', 'vite-mat-symbols.d.
 });
 
 /**
+ * Create wrapper components
+ */
+const mappingToComponent = ({ id, transformedId }: Mapping) => {
+  return `export const ${transformedId} = ({ weight = 400 }: BaseSymbolProps) => {
+  return <MaterialSymbol id="${id}" weight={weight} />;
+}
+`;
+};
+
+const template = `
+import { MaterialSymbol } from './symbol.tsx';
+
+type BaseSymbolProps = {
+  weight?: string;
+}
+
+${mappings.map(mappingToComponent)}
+`;
+
+writeFileSync(join('..', '..', '..', 'packages', 'vite-material-symbols', 'src', 'react', 'icon.tsx'), template);
+
+/**
  * Create mapping from proper import name to icon id as defined by the codepoints file
  */
-const mapStr = `export const iconMapping = {
-  ${mappings.map(({ transformedId, id }) => `${transformedId}: '${id}'`).join(',\n')}
+const idToMapping = ({ transformedId, id }: Mapping, index: number) => {
+  return `  ${transformedId}: '${id}'`;
+};
+
+const iconMapping = `type KeyType = typeof supportedExports[number]; 
+
+type Mapping = {
+  [K in KeyType]: string; // or any type you want for the values
+};
+
+export const iconMapping: Mapping = {
+${mappings.map(idToMapping).join(',\n')}
 }
 
 export const supportedExports = [
-  ${mappings.map(({ transformedId }) => `'${transformedId}'`).join(',\n')}
+${mappings.map(({ transformedId }) => `  '${transformedId}'`).join(',\n')}
 ]
 `;
 
-writeFileSync(join('..', '..', '..', 'packages', 'vite-material-symbols', 'src', 'mappings.ts'), mapStr, {
+writeFileSync(join('..', '..', '..', 'packages', 'vite-material-symbols', 'src', 'mappings.ts'), iconMapping, {
   encoding: 'utf-8',
 });

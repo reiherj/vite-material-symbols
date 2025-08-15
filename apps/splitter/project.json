@@ -24,19 +24,6 @@
         "command": "wasm-pack build --target nodejs --out-dir ../../packages/vite-material-symbols/src/font"
       }
     },
-    "test": {
-      "cache": true,
-      "executor": "@monodon/rust:test",
-      "outputs": ["{options.target-dir}"],
-      "options": {
-        "target-dir": "dist/target/splitter"
-      },
-      "configurations": {
-        "production": {
-          "release": true
-        }
-      }
-    },
     "lint": {
       "cache": true,
       "executor": "@monodon/rust:lint",
@@ -55,6 +42,13 @@
         "production": {
           "release": true
         }
+      }
+    },
+    "generate-ts": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "apps/splitter/utils",
+        "command": "npx tsx generate-definitions.ts"
       }
     }
   },

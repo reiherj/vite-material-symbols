@@ -1,59 +1,55 @@
-use std::collections::HashMap;
-use ttf_parser::Face;
 use crate::outline_builder::SvgPath;
+use std::cell::{LazyCell, RefCell};
+use std::collections::HashMap;
+use ttf_parser::{Face, Tag};
 
-pub static MATERIAL_SYMBOLS_TTF: &[u8] = include_bytes!(
-    concat!(env!("CARGO_MANIFEST_DIR"), "/font/MaterialIcons-Regular.ttf")
-);
+pub static MATERIAL_SYMBOLS_TTF: &[u8] = include_bytes!(concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/font/material-symbols-outlined.ttf"
+));
 
-pub static CODEPOINTS: &[u8] = include_bytes!(
-    concat!(env!("CARGO_MANIFEST_DIR"), "/font/MaterialIcons-Regular.codepoints")
-);
+pub static CODEPOINTS: &[u8] = include_bytes!(concat!(
+    env!("CARGO_MANIFEST_DIR"),
+    "/font/material-symbols-outlined.codepoints"
+));
 
-pub fn generate_paths(icon_name: &str) -> Result<String, Box<dyn std::error::Error>> {
-    let face = Face::parse(MATERIAL_SYMBOLS_TTF, 0)?;
-    let mut svg_path_builder = SvgPath::new();
-
-    // Print some basic font info
-    // print_basic_font_info(&face);
-
-    // Parse codepoints
-    let codepoints = parse_codepoints()?;
-
-    // Get some glyph
-    let codepoint_value = u32::from_str_radix(codepoints[icon_name].as_str(), 16)?;
-    let c = char::from_u32(codepoint_value).ok_or("Invalid codepoint")?;
-    let glyph_id = face.glyph_index(c).ok_or("Glyph not found")?;
-
-    let upm = face.units_per_em();
-    let target_size: f32 = 48.0;
-    let scale = target_size / upm as f32;
-
-    svg_path_builder.scale_factor = scale;
-
-    face.outline_glyph(glyph_id, &mut svg_path_builder);
-
-    // let view_box = format!("{} {} {} {}", bbox.x_min, -bbox.y_max, bbox.width(), bbox.height());
-    let view_box = "0 -48 48 48";
-    let svg = wrap_svg(svg_path_builder.path.as_str(), view_box);
-
-    Ok(svg)
+thread_local! {
+    // One RefCell<Face> per wasm instance/thread
+    static FACE: LazyCell<RefCell<Face<'static>>> = LazyCell::new(|| {
+        let face = Face::parse(MATERIAL_SYMBOLS_TTF, 0).expect("valid font");
+        RefCell::new(face)
+    });
 }
 
-// fn print_basic_font_info(face: &Face) {
-//     let is_reg = face.is_regular();
-//
-//     let names = face.names();
-//
-//    for name in names.into_iter() {
-//         if let Some(i) = name.to_string() {
-//             println!("{}", i);
-//         };
-//     }
-//
-//     println!("Font is regualar? {}", is_reg);
-//     println!("Number of glyphs: {}", face.number_of_glyphs());
-// }
+pub fn generate_paths(icon_name: &str, weight: i16) -> Result<String, Box<dyn std::error::Error>> {
+    FACE.with(|cell| {
+        let mut face = cell.borrow_mut();
+        let converted_weight = (weight as f32) / 1000.0_f32;
+
+        let mut svg_path_builder = SvgPath::new();
+
+        // Set variation
+        face.set_variation(Tag::from_bytes(b"wght"), converted_weight);
+
+        let codepoints = parse_codepoints()?;
+        let codepoint_value = u32::from_str_radix(codepoints[icon_name].as_str(), 16)?;
+        let c = char::from_u32(codepoint_value).ok_or("Invalid codepoint")?;
+        let glyph_id = face.glyph_index(c).ok_or("Glyph not found")?;
+
+        // The glyphs need to be uniformly sized
+        let upm = face.units_per_em();
+        let target_size: f32 = 48.0;
+        let scale = target_size / upm as f32;
+
+        svg_path_builder.scale_factor = scale;
+        face.outline_glyph(glyph_id, &mut svg_path_builder);
+
+        let view_box = "0 -48 48 48";
+        let svg = wrap_svg(svg_path_builder.path.as_str(), view_box);
+
+        Ok(svg)
+    })
+}
 
 fn parse_codepoints() -> Result<HashMap<String, String>, Box<dyn std::error::Error>> {
     let codepoints_text = String::from_utf8_lossy(CODEPOINTS)

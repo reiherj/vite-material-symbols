@@ -37,7 +37,7 @@ export const materialSymbolsPlugin = (): Plugin => {
       // Per-icon virtual module source
       if (id.startsWith(RESOLVED_ICON_PREFIX)) {
         const glyph = id.slice(RESOLVED_ICON_PREFIX.length);
-        const svg = get_icon(glyph);
+        const svg = get_icon(glyph, 350);
 
         return `
           import { jsx as _jsx } from 'react/jsx-runtime';
