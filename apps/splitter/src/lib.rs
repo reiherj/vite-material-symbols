@@ -1,5 +1,6 @@
 use wasm_bindgen::prelude::*;
 
+pub mod console;
 pub mod generate_paths;
 pub mod outline_builder;
 
