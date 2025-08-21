@@ -1,7 +1,7 @@
 {
-  "name": "vite-material-symbols",
+  "name": "vite-plugin-material-symbols",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "packages/vite-material-symbols/src",
+  "sourceRoot": "packages/vite-plugin-material-symbols/src",
   "projectType": "library",
   "tags": [],
   "// targets": "to see all targets run: nx show project react-icons --web",
@@ -10,11 +10,11 @@
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/packages/vite-material-symbols",
-        "tsConfig": "packages/vite-material-symbols/tsconfig.lib.json",
-        "packageJson": "packages/vite-material-symbols/package.json",
-        "main": "packages/vite-material-symbols/src/index.ts",
-        "assets": ["packages/vite-material-symbols/*.md"]
+        "outputPath": "dist/packages/vite-plugin-material-symbols",
+        "tsConfig": "packages/vite-plugin-material-symbols/tsconfig.lib.json",
+        "packageJson": "packages/vite-plugin-material-symbols/package.json",
+        "main": "packages/vite-plugin-material-symbols/src/index.ts",
+        "assets": ["packages/vite-plugin-material-symbols/*.md"]
       }
     }
   }

@@ -1,5 +1,5 @@
 {
-  "name": "react-icons",
+  "name": "vite-plugin-material-symbols",
   "version": "0.0.1",
   "main": "./index.js",
   "types": "./index.d.ts",
