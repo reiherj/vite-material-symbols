@@ -1,7 +1,7 @@
 type KeyType = typeof supportedExports[number]; 
 
 type Mapping = {
-  [K in KeyType]: string; // or any type you want for the values
+  [K in KeyType]: string;
 };
 
 export const iconMapping: Mapping = {

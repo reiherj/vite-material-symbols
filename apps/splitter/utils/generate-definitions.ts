@@ -61,20 +61,20 @@ writeFileSync(join('..', '..', 'web-react-test-app', 'src', 'vite-mat-symbols.d.
  * Create wrapper components
  */
 const mappingToComponent = ({ id, transformedId }: Mapping) => {
-  return `export const ${transformedId} = ({ weight = 400 }: BaseSymbolProps) => {
+  return `export const ${transformedId} = ({ weight = '400' }: BaseSymbolProps) => {
   return <MaterialSymbol id="${id}" weight={weight} />;
 }
 `;
 };
 
 const template = `
-import { MaterialSymbol } from './symbol.tsx';
+import { MaterialSymbol } from './symbol';
 
 type BaseSymbolProps = {
   weight?: string;
 }
 
-${mappings.map(mappingToComponent)}
+${mappings.map(mappingToComponent).join('\n')}
 `;
 
 writeFileSync(join('..', '..', '..', 'packages', 'vite-material-symbols', 'src', 'react', 'icon.tsx'), template);
@@ -89,7 +89,7 @@ const idToMapping = ({ transformedId, id }: Mapping, index: number) => {
 const iconMapping = `type KeyType = typeof supportedExports[number]; 
 
 type Mapping = {
-  [K in KeyType]: string; // or any type you want for the values
+  [K in KeyType]: string;
 };
 
 export const iconMapping: Mapping = {

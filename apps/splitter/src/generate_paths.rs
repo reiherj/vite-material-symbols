@@ -1,7 +1,98 @@
+use crate::console;
 use crate::outline_builder::SvgPath;
+use serde::{Deserialize, Serialize};
 use std::cell::{LazyCell, RefCell};
 use std::collections::HashMap;
+use std::convert::From;
 use ttf_parser::{Face, Tag};
+
+// Weight (wght)
+
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+pub enum Weight {
+    W100,
+    W200,
+    W300,
+    W400,
+    W500,
+    W600,
+    W700,
+}
+
+impl From<Weight> for u16 {
+    fn from(w: Weight) -> u16 {
+        match w {
+            Weight::W100 => 100,
+            Weight::W200 => 200,
+            Weight::W300 => 300,
+            Weight::W400 => 400,
+            Weight::W500 => 500,
+            Weight::W600 => 600,
+            Weight::W700 => 700,
+        }
+    }
+}
+
+// Outlines vs filled (FILL)
+
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+pub enum Fill {
+    Outline,
+    Filled,
+}
+
+impl From<Fill> for u8 {
+    fn from(f: Fill) -> u8 {
+        match f {
+            Fill::Outline => 1,
+            Fill::Filled => 0,
+        }
+    }
+}
+
+// Grade (GRAD) finer adjustments
+
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+pub enum Grade {
+    Gneg50,
+    Gneg25,
+    G0,
+    G200,
+}
+
+impl From<Grade> for i16 {
+    fn from(g: Grade) -> i16 {
+        match g {
+            Grade::Gneg50 => -50,
+            Grade::Gneg25 => -25,
+            Grade::G0 => 0,
+            Grade::G200 => 200,
+        }
+    }
+}
+
+// Optical size (opsz)
+
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
+pub enum OpticalSize {
+    O20,
+    O24,
+    O40,
+    O48,
+}
+
+impl From<OpticalSize> for u16 {
+    fn from(o: OpticalSize) -> u16 {
+        match o {
+            OpticalSize::O20 => 20,
+            OpticalSize::O24 => 24,
+            OpticalSize::O40 => 40,
+            OpticalSize::O48 => 48,
+        }
+    }
+}
+
+// SVG generation
 
 pub static MATERIAL_SYMBOLS_TTF: &[u8] = include_bytes!(concat!(
     env!("CARGO_MANIFEST_DIR"),
@@ -14,25 +105,31 @@ pub static CODEPOINTS: &[u8] = include_bytes!(concat!(
 ));
 
 thread_local! {
-    // One RefCell<Face> per wasm instance/thread
-    static FACE: LazyCell<RefCell<Face<'static>>> = LazyCell::new(|| {
-        let face = Face::parse(MATERIAL_SYMBOLS_TTF, 0).expect("valid font");
-        RefCell::new(face)
-    });
+// One RefCell<Face> per wasm instance/thread
+static FACE: LazyCell<RefCell<Face<'static>>> = LazyCell::new(|| {
+    let face = Face::parse(MATERIAL_SYMBOLS_TTF, 0).expect("valid font");
+    RefCell::new(face)
+});
 }
 
-pub fn generate_paths(icon_name: &str, weight: i16) -> Result<String, Box<dyn std::error::Error>> {
+#[derive(Serialize, Deserialize)]
+pub struct GeneratePathsConfig {
+    pub weights: Vec<Weight>,
+    pub grade: Vec<Grade>,
+    pub fill: Fill,
+    pub optical_sizes: Vec<OpticalSize>,
+}
+
+pub fn generate_paths(
+    icon_name: String,
+    config: GeneratePathsConfig,
+) -> Result<Vec<String>, Box<dyn std::error::Error>> {
     FACE.with(|cell| {
         let mut face = cell.borrow_mut();
-        let converted_weight = (weight as f32) / 1000.0_f32;
-
         let mut svg_path_builder = SvgPath::new();
 
-        // Set variation
-        face.set_variation(Tag::from_bytes(b"wght"), converted_weight);
-
         let codepoints = parse_codepoints()?;
-        let codepoint_value = u32::from_str_radix(codepoints[icon_name].as_str(), 16)?;
+        let codepoint_value = u32::from_str_radix(codepoints[&icon_name].as_str(), 16)?;
         let c = char::from_u32(codepoint_value).ok_or("Invalid codepoint")?;
         let glyph_id = face.glyph_index(c).ok_or("Glyph not found")?;
 
@@ -42,12 +139,24 @@ pub fn generate_paths(icon_name: &str, weight: i16) -> Result<String, Box<dyn st
         let scale = target_size / upm as f32;
 
         svg_path_builder.scale_factor = scale;
-        face.outline_glyph(glyph_id, &mut svg_path_builder);
 
-        let view_box = "0 -48 48 48";
-        let svg = wrap_svg(svg_path_builder.path.as_str(), view_box);
+        let svgs = config
+            .weights
+            .iter()
+            .map(|weight| {
+                let converted_weight = (u16::from(*weight) as f32) / 1000.0_f32;
+                console::log(&format!("{}", converted_weight));
 
-        Ok(svg)
+                // Set variation
+                face.set_variation(Tag::from_bytes(b"wght"), converted_weight);
+                face.outline_glyph(glyph_id, &mut svg_path_builder);
+
+                let view_box = "0 -48 48 48";
+                wrap_svg(svg_path_builder.path.as_str(), view_box)
+            })
+            .collect::<Vec<_>>();
+
+        Ok(svgs)
     })
 }
 

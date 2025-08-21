@@ -1,5 +1,5 @@
 import type { Plugin } from 'vite';
-import { get_icon } from './font';
+import { get_icon, GeneratePathsConfig } from './font';
 import { iconMapping, supportedExports } from './mappings';
 
 export const materialSymbolsPlugin = (): Plugin => {
@@ -37,7 +37,12 @@ export const materialSymbolsPlugin = (): Plugin => {
       // Per-icon virtual module source
       if (id.startsWith(RESOLVED_ICON_PREFIX)) {
         const glyph = id.slice(RESOLVED_ICON_PREFIX.length);
-        const svg = get_icon(glyph, 350);
+        const svg = get_icon(glyph, {
+          fill: 'Outline',
+          grade: ['G0', 'G200'],
+          optical_sizes: ['O20'],
+          weights: ['W400', 'W500', 'W600'],
+        });
 
         return `
           import { jsx as _jsx } from 'react/jsx-runtime';
