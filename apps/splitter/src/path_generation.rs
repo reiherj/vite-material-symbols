@@ -1,4 +1,3 @@
-use crate::console;
 use crate::outline_builder::SvgPath;
 use serde::{Deserialize, Serialize};
 use std::cell::{LazyCell, RefCell};
@@ -126,7 +125,6 @@ pub fn generate_paths(
 ) -> Result<Vec<String>, Box<dyn std::error::Error>> {
     FACE.with(|cell| {
         let mut face = cell.borrow_mut();
-        let mut svg_path_builder = SvgPath::new();
 
         let codepoints = parse_codepoints()?;
         let codepoint_value = u32::from_str_radix(codepoints[&icon_name].as_str(), 16)?;
@@ -138,21 +136,21 @@ pub fn generate_paths(
         let target_size: f32 = 48.0;
         let scale = target_size / upm as f32;
 
-        svg_path_builder.scale_factor = scale;
-
         let svgs = config
             .weights
             .iter()
             .map(|weight| {
+                let mut svg_path_builder = SvgPath::new();
+                svg_path_builder.scale_factor = scale;
                 let converted_weight = (u16::from(*weight) as f32) / 1000.0_f32;
-                console::log(&format!("{}", converted_weight));
 
-                // Set variation
-                face.set_variation(Tag::from_bytes(b"wght"), converted_weight);
                 face.outline_glyph(glyph_id, &mut svg_path_builder);
+                face.set_variation(Tag::from_bytes(b"wght"), 0.667);
 
                 let view_box = "0 -48 48 48";
-                wrap_svg(svg_path_builder.path.as_str(), view_box)
+                let wrapped_svg = wrap_svg(svg_path_builder.path.as_str(), view_box);
+                println!("{}", wrapped_svg);
+                return wrapped_svg;
             })
             .collect::<Vec<_>>();
 
