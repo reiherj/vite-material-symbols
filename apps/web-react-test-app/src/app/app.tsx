@@ -1,4 +1,4 @@
-import { Menu, Home, Person, ZoomOut, Abc, AccessAlarm } from 'vite-mat-symbols';
+import { Menu, Home, Person, ZoomOut, Abc, AcUnit } from 'vite-mat-symbols';
 
 export function App() {
   return (
@@ -13,7 +13,7 @@ export function App() {
         <ZoomOut />
       </div>
       <div>
-        <AccessAlarm />
+        <AcUnit />
       </div>
     </div>
   );

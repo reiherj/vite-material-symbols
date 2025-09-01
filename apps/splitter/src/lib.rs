@@ -1,10 +1,10 @@
 use wasm_bindgen::prelude::*;
 
 pub mod console;
-pub mod generate_paths;
 pub mod outline_builder;
+pub mod path_generation;
 
-use crate::generate_paths::{generate_paths, GeneratePathsConfig};
+use crate::path_generation::{generate_paths, GeneratePathsConfig};
 
 #[wasm_bindgen(typescript_custom_section)]
 const TS_APPEND_CONTENT: &'static str = r#"
