@@ -12,7 +12,10 @@ export default defineConfig(() => ({
   plugins: [
     react(),
     nxViteTsPaths(),
-    nxCopyAssetsPlugin(['*.md']),
+    // Everything the published tarball needs that the bundler does not emit:
+    // the manifest, the generated ambient types, and the font the plugin reads
+    // at build time.
+    nxCopyAssetsPlugin(['*.md', 'package.json', 'client.d.ts', 'font/**']),
     dts({
       entryRoot: 'src',
       tsconfigPath: path.join(__dirname, 'tsconfig.lib.json'),
@@ -41,6 +44,9 @@ export default defineConfig(() => ({
       },
       formats: ['es' as const],
       fileName: (_format: string, name: string) => `${name}.js`,
+      // Without this the CSS is named after the package; `exports` points at
+      // ./symbols.css.
+      cssFileName: 'symbols',
     },
     rollupOptions: {
       external: [

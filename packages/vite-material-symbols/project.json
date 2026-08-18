@@ -5,26 +5,6 @@
   "projectType": "library",
   "tags": [],
   "targets": {
-    "build": {
-      "executor": "@nx/js:tsc",
-      "outputs": [
-        "{options.outputPath}"
-      ],
-      "options": {
-        "outputPath": "dist/packages/vite-material-symbols",
-        "tsConfig": "packages/vite-material-symbols/tsconfig.lib.json",
-        "packageJson": "packages/vite-material-symbols/package.json",
-        "main": "packages/vite-material-symbols/src/index.ts",
-        "assets": [
-          "packages/vite-material-symbols/*.md",
-          {
-            "input": "packages/vite-material-symbols/font",
-            "glob": "**/*",
-            "output": "font"
-          }
-        ]
-      }
-    },
     "generate-types": {
       "executor": "nx:run-commands",
       "options": {
