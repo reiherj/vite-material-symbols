@@ -33,17 +33,24 @@ export default defineConfig(() => ({
       transformMixedEsModules: true,
     },
     lib: {
-      // Could also be a dictionary or array of multiple entry points.
-      entry: 'src/index.ts',
-      name: 'react-icons',
-      fileName: 'index',
-      // Change this to the formats you want to support.
-      // Don't forget to update your package.json as well.
+      // Two entries with different targets: `index` is the Vite plugin and
+      // runs in Node, `runtime` is the React component and runs in the browser.
+      entry: {
+        index: 'src/index.ts',
+        runtime: 'src/runtime.tsx',
+      },
       formats: ['es' as const],
+      fileName: (_format: string, name: string) => `${name}.js`,
     },
     rollupOptions: {
-      // External packages that should not be bundled into your library.
-      external: ['react', 'react-dom', 'react/jsx-runtime'],
+      external: [
+        'react',
+        'react-dom',
+        'react/jsx-runtime',
+        'subset-font',
+        'fontverter',
+        /^node:/,
+      ],
     },
   },
 }));

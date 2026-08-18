@@ -1,0 +1,28 @@
+/*
+ * Axis values are set inline by the component as a single
+ * `font-variation-settings` declaration, which the browser interpolates
+ * natively. The values below are the fallback for a bare `.vite-mat-symbol`
+ * and the starting point a transition animates from.
+ */
+.vite-mat-symbol {
+  font-family: 'Material Symbols Outlined', sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: var(--ms-size, 24px);
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 0, 'GRAD' 0, 'opsz' 24, 'wght' 400;
+  transition: font-variation-settings var(--ms-duration, 0s) ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vite-mat-symbol {
+    transition: none;
+  }
+}
