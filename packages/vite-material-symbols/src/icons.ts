@@ -1,12 +1,35 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const here = dirname(fileURLToPath(import.meta.url));
 
-/** Shipped alongside the package; see project.json `assets`. */
-export const FONT_DIR = join(here, '..', 'font');
-export const FONT_TTF = join(FONT_DIR, 'material-symbols-outlined.ttf');
+const TTF_NAME = 'material-symbols-outlined.ttf';
+
+/**
+ * The font sits next to the package root, but this module's depth differs
+ * between layouts: `src/icons.ts` during development, flattened to the package
+ * root once built. Probing both keeps a published install working without
+ * making the source tree pretend to be the built one.
+ */
+function resolveFontDir(): string {
+  const candidates = [
+    join(here, 'font'), // built: this module is at the package root
+    join(here, '..', 'font'), // source: this module is in src/
+  ];
+
+  const found = candidates.find((dir) => existsSync(join(dir, TTF_NAME)));
+  if (!found) {
+    throw new Error(
+      `[vite-material-symbols] could not locate ${TTF_NAME}. Looked in:\n` +
+        candidates.map((c) => `  ${c}`).join('\n')
+    );
+  }
+  return found;
+}
+
+export const FONT_DIR = resolveFontDir();
+export const FONT_TTF = join(FONT_DIR, TTF_NAME);
 export const CODEPOINTS = join(FONT_DIR, 'material-symbols-outlined.codepoints');
 
 /** Upstream ships a misspelled duplicate of `fluorescent`. */
