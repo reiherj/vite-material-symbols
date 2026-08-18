@@ -1,14 +1,17 @@
 import type { CSSProperties, HTMLAttributes } from 'react';
-import './symbols.css';
+// `?inline` keeps the CSS an editable file while landing it in the bundle as a
+// string. A plain import would be extracted to a separate stylesheet in lib
+// mode and the import stripped, leaving consumers with unstyled ligature text.
+import symbolsCss from './symbols.css?inline';
 
 const FONT_FAMILY = 'Material Symbols Outlined';
 
 let registered = false;
 
 /**
- * Injects the `@font-face` rule. The URL is only known after the build has
- * hashed the subsetted font, so it is passed in by a plugin-generated module
- * rather than living in symbols.css.
+ * Injects the base styles and the `@font-face` rule. Both go in together
+ * because the font URL is only known after the build has hashed the subsetted
+ * font, so it cannot live in a static stylesheet.
  *
  * `font-display: block` matters here: the element's text content is the
  * ligature name, so with `swap` the literal word "home" would flash before
@@ -21,6 +24,7 @@ export function registerFontFace(url: string): void {
   const style = document.createElement('style');
   style.dataset['viteMatSymbols'] = '';
   style.textContent =
+    symbolsCss +
     `@font-face{font-family:'${FONT_FAMILY}';` +
     `src:url(${JSON.stringify(url)}) format(${JSON.stringify(
       url.endsWith('.ttf') ? 'truetype' : 'woff2'
