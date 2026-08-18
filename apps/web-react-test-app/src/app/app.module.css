@@ -1,1 +1,47 @@
-/* Your styles goes here. */
+.page {
+  font-family: system-ui, sans-serif;
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+.page h2 {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.6;
+  margin-top: 2.5rem;
+}
+.nav {
+  display: flex;
+  gap: 0.5rem;
+}
+.navItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.75rem 1.25rem;
+  border: 0;
+  border-radius: 0.75rem;
+  background: transparent;
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: inherit;
+}
+.navItem[aria-current='page'] {
+  background: color-mix(in srgb, currentColor 10%, transparent);
+}
+.like {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: crimson;
+  padding: 0;
+}
+.row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 0.75rem;
+}
