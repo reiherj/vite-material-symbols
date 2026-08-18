@@ -1,7 +1,7 @@
 {
   "name": "workspace",
   "version": "1.0.0",
-  "description": "This library includes icons derived from Google’s Material Symbols, which are licensed under the Apache License 2.0.",
+  "description": "This library includes icons derived from Google\u2019s Material Symbols, which are licensed under the Apache License 2.0.",
   "main": "index.js",
   "scripts": {},
   "repository": {
@@ -19,7 +19,6 @@
     "@babel/core": "^7.14.5",
     "@babel/preset-react": "^7.14.5",
     "@eslint/js": "^9.8.0",
-    "@monodon/rust": "^2.3.0",
     "@nx/devkit": "21.3.11",
     "@nx/eslint": "21.3.11",
     "@nx/eslint-plugin": "21.3.11",
