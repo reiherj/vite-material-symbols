@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { nxCopyAssetsPlugin } from '@nx/vite/plugins/nx-copy-assets.plugin';
-import { materialSymbolsPlugin } from '../../packages/vite-material-symbols/src';
+import { materialSymbolsPlugin } from '../../packages/vite-material-symbols/src/index';
 
 export default defineConfig(() => ({
   root: __dirname,

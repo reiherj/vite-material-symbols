@@ -18,11 +18,11 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "foo": [
-        "packages/foo/src/index.ts"
+      "vite-material-symbols": [
+        "packages/vite-material-symbols/src/index.ts"
       ],
-      "vite-plugin-material-symbols": [
-        "packages/vite-plugin-material-symbols/src/index.ts"
+      "vite-material-symbols/runtime": [
+        "packages/vite-material-symbols/src/runtime.tsx"
       ]
     }
   },

@@ -1,12 +1,32 @@
 {
-  "name": "vite-plugin-material-symbols",
+  "name": "vite-material-symbols",
   "version": "0.0.1",
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {
     ".": {
-      "import": "./index.mjs",
-      "require": "./index.js"
-    }
-  }
+      "types": "./index.d.ts",
+      "import": "./index.js"
+    },
+    "./runtime": {
+      "types": "./runtime.d.ts",
+      "import": "./runtime.js"
+    },
+    "./symbols.css": "./symbols.css",
+    "./font/*": "./font/*",
+    "./client": "./client.d.ts"
+  },
+  "peerDependencies": {
+    "vite": "^5.0.0 || ^6.0.0"
+  },
+  "dependencies": {
+    "subset-font": "^2.5.0"
+  },
+  "type": "module",
+  "files": [
+    "*.js",
+    "*.d.ts",
+    "*.css",
+    "font"
+  ]
 }
