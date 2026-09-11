@@ -2,10 +2,10 @@
 
 A Vite plugin that ships only the Material Symbols your app imports, as a
 subsetted **variable** font, so weight, fill, grade and optical size stay
-adjustable and animatable at runtime. A 7-icon app emits ~8.9 KB against ~3.4 MB
+adjustable and animatable at runtime. The example 7-icon app emits ~8.9 KB against ~3.4 MB
 for the full font.
 
-Work in progres.
+Work in progress.
 
 ## Develop
 
@@ -36,9 +36,6 @@ apps/web-react-test-app/          Demo
 
 ## Things worth knowing
 
-Three of these break silently if you change them. You get wrong output, not an
-error.
-
 Subsetting needs `noLayoutClosure: true` and explicit PUA codepoints. Layout
 closure works on characters, not words, so reaching the glyphs through the
 ligature letters drags in every icon spellable with them. That is 4,630 glyphs
@@ -52,17 +49,15 @@ Axes are inline `font-variation-settings`, not `@property` custom properties,
 which React's style updates never transition. Keep the axis order stable between
 renders or the browser hard-switches instead of interpolating.
 
-Dev serves the raw TTF on purpose. Compressing to woff2 takes 29.5 s on the
-first request, and the used set is incomplete anyway while modules load lazily.
-
+Dev serves the raw TTF on purpose.
 ## Todo
 
-- CI matrix over Vite versions, then a peer range that matches it
-- Import scanning is regex-based, so barrel re-exports under-subset and wildcard
-  imports fall back to the full font
-- Runtime is React-only
-- Ship both licenses in the tarball (root MIT, font Apache-2.0)
-- Publish to npm
+- [ ] CI matrix over Vite versions, then a peer range that matches it
+- [ ] Import scanning is regex-based, so barrel re-exports under-subset and wildcard
+  [ ] imports fall back to the full font
+- [ ] Runtime is React-only
+- [ ] Ship both licenses in the tarball (root MIT, font Apache-2.0)
+- [ ] Publish to npm
 
 ## Attributions
 
